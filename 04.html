@@ -60,32 +60,7 @@
     button[type="submit"]:hover {
       background-color: blue;
     }
-    @media only screen and (max-width: 768px) {
-      .main {
-        width: 90%;
-      }
-    }
-    @media only screen and (max-width: 480px) {
-      .main {
-        width: 100%;
-        padding: 10px;
-      }
-      button[type="submit"] {
-        height: 20px;
-      }
-    }
-    .main {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .main {
-      width: 40vw;
-    }
-    button[type="submit"] {
-      width: 30vw;
-    }
-	
+    
   </style>
 </head>
 <body>
@@ -121,7 +96,7 @@
           loginMessage.textContent = 'Login successful';
           loginMessage.style.color = 'green';
           setTimeout(() => {
-            window.location.href = 'index.html'; // Redirect to welcome page
+            window.location.href = '1000.html'; // Redirect to welcome page
           }, 3000);
         } else {
           loginMessage.textContent = 'Invalid email or password';
