@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HTML Registration Form</title>
+   <style>
+    body{
+      -moz-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+	  background: #f2f2f2;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .main {
+      background-color: white;
+      border-radius: 25px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      width: 300px;
+    }
+    .main h2 {
+      color: black;
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 2px;
+      color: black;
+      font-weight: bold;
+   }
+    input[type="text"], input[type="email"], input[type="password"], select {
+      width: 100%;
+      margin-bottom: 1px;
+      padding: 10px;
+      box-sizing: border-box;
+      border: 2px solid silver;
+      border-radius: 8px;
+    }
+    button[type="submit"] {
+      width: 100%;
+      height: 30px;
+      background-color:green;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      align: center;
+    }
+    button[type="submit"]:hover {
+      background-color: blue;
+    }
+    @media only screen and (max-width: 768px) {
+      .main {
+        width: 90%;
+      }
+    }
+    @media only screen and (max-width: 480px) {
+      .main {
+        width: 100%;
+        padding: 10px;
+      }
+      button[type="submit"] {
+        height: 20px;
+      }
+    }
+    .main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .main {
+      width: 40vw;
+    }
+    button[type="submit"] {
+      width: 30vw;
+    }
+	
+  </style>
+  </head>
+<body>
+  <div class="main">
+    <center>
+      <font face=""><h2>REGISTRATION FORM</h2></font>
+    </center>
+    <form id="registration-form">
+      <label for="first">First Name:</label>
+      <input type="text" id="first" name="first" required />
+      <label for="last">Last Name:</label>
+      <input type="text" id="last" name="last" required />
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required />
+      <label for="repassword">Confirm Password:</label>
+      <input type="password" id="repassword" name="repassword" required />
+      <label for="mobile">Contact:</label>
+      <input type="text" id="mobile" name="mobile" maxlength="10" required />
+      <label for="gender">Gender:</label>
+      <select id="gender" name="gender" required>
+        <option value="male"> Male </option>
+        <option value="female"> Female </option>
+        <option value="other"> Other </option>
+      </select>
+      <center>
+        <button type="submit"> Submit </button>
+        <p id="registration-message"></p>
+      </center>
+    </form>
+  </div>
+  <script>
+    const form = document.getElementById('registration-form');
+    const registrationMessage = document.getElementById('registration-message');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const firstName = document.getElementById('first').value;
+      const lastName = document.getElementById('last').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const repassword = document.getElementById('repassword').value;
+      const mobile = document.getElementById('mobile').value;
+      const gender = document.getElementById('gender').value;
+
+      if (password !== repassword) {
+        registrationMessage.textContent = 'Passwords do not match';
+        registrationMessage.style.color = 'red';
+        return;
+      }
+
+      const userData = {
+        firstName,
+        lastName,
+        email,
+        password,
+        mobile,
+        gender,
+      };
+
+      localStorage.setItem('userData', JSON.stringify(userData));
+
+      registrationMessage.textContent = 'YOUR REGISTRATION SUCCESSFUL';
+      registrationMessage.style.color = 'green';
+      setTimeout(() => {
+        registrationMessage.textContent = 'PLEASE LOGIN';
+        registrationMessage.style.color = 'blue';
+        setTimeout(() => {
+          window.location.href = '04.html'; // Redirect to login page
+        }, 3000);
+      }, 3000);
+    });
+  </script>
+</body>
+</html>
