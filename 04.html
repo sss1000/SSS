@@ -1,0 +1,142 @@
+<!-- login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login | SSS Education</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    body {
+      background: linear-gradient(to right, #e0f7ff, #d4edff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .login-box {
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 100%;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #004aad;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #004aad;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #002e7d;
+    }
+    .error {
+      color: red;
+      text-align: center;
+      margin-top: -10px;
+      margin-bottom: 20px;
+      font-size: 0.9rem;
+    }
+    .popup {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .popup-content {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+    }
+    .popup-content h3 {
+      color: #004aad;
+      margin-bottom: 10px;
+    }
+    .popup-content p {
+      font-size: 1rem;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-box">
+    <h2>Student Login</h2>
+    <form id="loginForm">
+      <label for="email">Email</label>
+      <input type="email" id="email" required />
+
+      <label for="password">Password</label>
+      <input type="password" id="password" required />
+
+      <div class="error" id="errorMsg"></div>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  <div class="popup" id="loginPopup">
+    <div class="popup-content">
+      <h3>✅ Login Successful</h3>
+      <p>Redirecting to home page...</p>
+    </div>
+  </div>
+
+  <script>
+    const loginForm = document.getElementById("loginForm");
+    const errorMsg = document.getElementById("errorMsg");
+    const loginPopup = document.getElementById("loginPopup");
+
+    loginForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+
+      const storedEmail = localStorage.getItem("registeredEmail");
+      const storedPassword = localStorage.getItem("registeredPassword");
+
+      if (email === storedEmail && password === storedPassword) {
+        errorMsg.textContent = "";
+        loginPopup.style.display = "flex";
+
+        localStorage.setItem("isLoggedIn", "true");
+
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 2000);
+      } else {
+        errorMsg.textContent = "Invalid email or password!";
+      }
+    });
+  </script>
+
+</body>
+</html>
